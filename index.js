@@ -16,24 +16,32 @@ let connection = mongoose.connection;
 
 app.get('/', 
     (req, res) => {
-    console.log("This is a Get request");
-    res.json({
-        "message": "Good Morning " + req.body.name,
-    });
+        let studentSchema = new mongoose.Schema(
+            {
+            name: String,
+            age: Number,
+            hight: Number,
+        }
+        );
+        
+        let Student = mongoose.model('Students', studentSchema);
+
 });
 
-let studentSchema = new mongoose.Schema(
-    {
-    name: String,
-    age: Number,
-    hight: Number,
-}
-);
 
-let Student = mongoose.model('Students', studentSchema);
 
 app.post('/', 
     (req, res) => {
+        let studentSchema = new mongoose.Schema(
+            {
+            name: String,
+            age: Number,
+            hight: Number,
+        }
+        );
+        
+        let Student = mongoose.model('Students', studentSchema);
+
         let newStudent = req.body;
         let student = new Student(newStudent);
             student.save().then( 

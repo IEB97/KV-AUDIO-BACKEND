@@ -1,12 +1,26 @@
+import Student from "../models/student.js";
+
 export function getStudent(req, res) {
-    res.json({
-        "Message": "This is a get request from student route"
-    })
-}
+   Student.find().then(
+    (result)=>{
+        res.json(result)
+    }           
+   )
+ }
 
 export function postStudent(req, res) {    
-    res.json({
-        "Message": "This is a post request from student route"
+    
+    let studentData = req.body;
+
+    let student = new Student(studentData);
+
+    student.save().then( ()=> {
+        res.json({
+            message: "Student saved successfully"
+        })
+    }).catch( () => {
+        message: "student saving failed"
     })
+            
 }
   

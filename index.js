@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import studentRouter from './routes/studentRoutes.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,10 +13,7 @@ const connection = mongoose.connection;
         console.log("MongoDB connection established successfully");
     } 
 );       
-
-app.use("/students", studentRouter);
-
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 
-});
+}); 

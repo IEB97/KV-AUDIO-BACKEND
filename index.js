@@ -4,13 +4,15 @@ import mongoose from 'mongoose';
 import userrouter from './routes/userrouter.js';
 import productRouter from './routes/productRouter.js';
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-    let token = req.headers('authorization');
+    let token = req.headers['authorization'];
     if (token!=null){
         token = token.replace("Bearer ", "");
 
@@ -27,7 +29,7 @@ app.use((req, res, next) => {
 
 
 
-let mongoURL = "mongodb+srv://IEB97:123@cluster0.p3sm5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+let mongoURL = process.env.MONGO_URL;
 mongoose.connect(mongoURL);
 
 const connection = mongoose.connection;
